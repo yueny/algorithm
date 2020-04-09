@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>文件补偿异常</title>
+
+    <style>
+        table {
+            border: 1px solid black;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        table thead th {
+            border: 1px solid black;
+        }
+        table tbody td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+<div style="border: black;width: 400px;height: 400px;background: #2a6496">
+    文件数据补偿失败， 详细异常信息如下：
+
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+        <th>序号</th>
+
+        <th>文件名</th>
+        <th>错误信息/描述</th>
+        </thead>
+
+        <tbody>
+        <!--
+        stat 是状态变量，有 index,count,size,current,even,odd,first,last等属性，如果没有显示设置状态变量，thymeleaf会默 认给个“变量名+Stat"的状态变量。
+        -->
+        <tr th:each="line, stat:${list}" th:style="'background-color:'+@{${stat.odd}?'#F2F2F2'}">
+            <td th:text="${stat.count}"></td>
+
+            <td th:text="${line['fileName']}"></td>
+            <td th:text="${line['cause']}"></td>
+
+            <!-- 多级  -->
+            <!-- 写法一：
+            <td th:text="${line['scourse']['cname']}"></td>
+            <td th:text="${line['scourse']['cscore']}"></td>-->
+            <!-- 写法二：
+            <td th:text="*{line['scourse']['cname']}"></td>
+            <td th:text="*{line['scourse']['cscore']}"></td>-->
+            <!-- 写法三：
+            <td th:object="${line['scourse']}">
+                <span th:text="*{['cname']}"></span>
+            </td>
+            <td th:object="${line['scourse']}">
+                <span th:text="*{['cscore']}"></span>
+            </td>
+            -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
