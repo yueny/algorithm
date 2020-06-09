@@ -1,7 +1,7 @@
-package com.yueny.study.algorithm.service.impl;
+package com.yueny.study.console.service.impl;
 
-import com.yueny.study.algorithm.service.AbstractService;
-import com.yueny.study.algorithm.service.IUserService;
+import com.yueny.study.console.service.AbstractService;
+import com.yueny.study.console.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.yueny.study.algorithm;
+package com.yueny.study.console;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

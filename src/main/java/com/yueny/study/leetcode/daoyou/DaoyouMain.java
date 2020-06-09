@@ -17,8 +17,9 @@ import java.util.concurrent.TimeUnit;
  *
  *
  * 思路
- * 1.栅栏
- * 2.completable future
+ * 1. 栅栏
+ * 2. completable future
+ * 3. CyclicBarrier
  */
 public class DaoyouMain {
     @AllArgsConstructor

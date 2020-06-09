@@ -1,4 +1,4 @@
-package com.yueny.study.algorithm.service;
+package com.yueny.study.console.service;
 
 
 import java.util.List;

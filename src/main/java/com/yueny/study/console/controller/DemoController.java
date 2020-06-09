@@ -1,6 +1,6 @@
-package com.yueny.study.algorithm.controller;
+package com.yueny.study.console.controller;
 
-import com.yueny.study.algorithm.service.IUserService;
+import com.yueny.study.console.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
