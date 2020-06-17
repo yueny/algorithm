@@ -3,7 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
+	<!--<parent>-->
+		<!--<groupId>com.yueny</groupId>-->
+		<!--<artifactId>yueny-parent</artifactId>-->
+		<!--<version>1.1.6-RELEASE</version>-->
+	<!--</parent>-->
+
     <groupId>com.yueny.study</groupId>
     <artifactId>algorithm</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -12,7 +18,8 @@
 	<properties>
 		<java.version>1.8</java.version>
 
-		<spring.boot.version>1.5.17.RELEASE</spring.boot.version>
+		<!--<spring-boot.version>1.5.17.RELEASE</spring-boot.version>-->
+		<spring-boot.version>2.1.14.RELEASE</spring-boot.version>
 		<org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
 		<guava.version>28.2-jre</guava.version>
 	</properties>
@@ -23,7 +30,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot.version}</version>
+				<version>${spring-boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -67,6 +74,18 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+
+		<!--&lt;!&ndash; yueny rapid &ndash;&gt;-->
+		<!--<dependency>-->
+			<!--<groupId>com.yueny.rapid</groupId>-->
+			<!--<artifactId>rapid-lang-date</artifactId>-->
+			<!--<version>1.0.1-SNAPSHOT</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>com.yueny.rapid</groupId>-->
+			<!--<artifactId>rapid-lang-thread</artifactId>-->
+			<!--<version>1.0.1-SNAPSHOT</version>-->
+		<!--</dependency>-->
 
         <!-- JSON  -->
         <dependency>
@@ -129,7 +148,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot.version}</version>
+				<version>${spring-boot.version}</version>
 				<configuration>
 					<executable>true</executable>
 				</configuration>
