@@ -75,17 +75,22 @@
 		</dependency>
 
 
-		<!--&lt;!&ndash; yueny rapid &ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>com.yueny.rapid</groupId>-->
-			<!--<artifactId>rapid-lang-date</artifactId>-->
-			<!--<version>1.0.1-SNAPSHOT</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>com.yueny.rapid</groupId>-->
-			<!--<artifactId>rapid-lang-thread</artifactId>-->
-			<!--<version>1.0.1-SNAPSHOT</version>-->
-		<!--</dependency>-->
+		<!-- yueny rapid -->
+		<dependency>
+			<groupId>com.yueny.rapid</groupId>
+			<artifactId>rapid-lang-date</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid</groupId>
+			<artifactId>rapid-lang-thread</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid</groupId>
+			<artifactId>rapid-lang-util</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
 
         <!-- JSON  -->
         <dependency>
@@ -164,6 +169,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
