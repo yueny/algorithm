@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+/**
+ * 参考 dubbo ConsistentHashLoadBalance
+ */
 public class ConsistentHash {
 
     private final TreeMap<Long, Node> virtualNodes;
@@ -38,10 +41,22 @@ public class ConsistentHash {
         this.replicaNumber = 160;
         for (Node node : nodes) {
             for (int i = 0; i < replicaNumber / 4; i++) {
-                byte[] digest = md5(node.getPath() + i);
+                /**
+                 * 可以选择服务器的ip或主机名作为关键字进行哈希，这样每台机器就能确定其在哈希环上的位置，
+                 * 这里假设将N台服务器使用ip地址(getPath)哈希后在环空间的位置
+                 */
+                byte[] digestMd5 = md5(node.getPath() + i);
                 for (int h = 0; h < 4; h++) {
-                    long m = hash(digest, h);
-                    virtualNodes.put(m, node);
+                    // 此处 总计循环次数为  nodes.size() * (replicaNumber / 4) * 4 = nodes.size() * replicaNumber = 1600
+                    long hashj = hash(digestMd5, h);
+
+                    /**
+                     * key 为计算的hash结果。 value为存储值
+                     *
+                     * key:  节点地址
+                     *
+                     */
+                    virtualNodes.put(hashj, node);
                 }
             }
         }
@@ -55,6 +70,10 @@ public class ConsistentHash {
 //            sb.append(s);
 //        }
 //        return sb.toString().hashCode();
+
+        // 根据对象在内存中的地址算出来的一个数值。identityHashCode是根据Object类hashCode()方法来计算hash值，无论子类是否重写了hashCode()方法。
+        // 如果重载了hashCode()方法，而又想获未重载之前的object.hashCode(),则可以使用System.identityHashCode()
+        // 目的： 加速对象去重
         return System.identityHashCode(nodes);
     }
 
@@ -113,14 +132,20 @@ public class ConsistentHash {
         return node;
     }
 
-    private long hash(byte[] digest, int number) {
-        return (((long) (digest[3 + number * 4] & 0xFF) << 24)
-                | ((long) (digest[2 + number * 4] & 0xFF) << 16)
-                | ((long) (digest[1 + number * 4] & 0xFF) << 8)
-                | (digest[0 + number * 4] & 0xFF))
+    private long hash(byte[] digestMd5, int number) {
+        // 截取其中32位作为映射值
+        return (
+                ((long) (digestMd5[3 + number * 4] & 0xFF) << 24)
+                | ((long) (digestMd5[2 + number * 4] & 0xFF) << 16)
+                | ((long) (digestMd5[1 + number * 4] & 0xFF) << 8)
+                | (digestMd5[0 + number * 4] & 0xFF)
+            )
                 & 0xFFFFFFFFL;
     }
 
+    /**
+     * 数据 md5 计算
+     */
     private byte[] md5(String value) {
         MessageDigest md5;
         try {
