@@ -13,7 +13,11 @@ import java.util.TreeMap;
  */
 public class ConsistentHash {
 
-    private final TreeMap<Long, Node> virtualNodes;
+    /**
+     * 将以有序Map的形式在内存中缓存每个节点的Hash值对应的物理节点信息。
+     * key 为 node.getPath() 取md5后计算hash的前32位
+     */
+    private final SortedMap<Long, Node> virtualNodes;
 
     private final int replicaNumber;
 
@@ -39,22 +43,26 @@ public class ConsistentHash {
 
         // 虚拟节点数
         this.replicaNumber = 160;
+        // 第一层循环为物理节点数
         for (Node node : nodes) {
+            // 第二第三层循环为开辟虚拟节点数。 目的是： 将每个物理节点虚拟出一定数量的虚拟节点，分散到这个值空间上。
+            // 此处是给每个物理节点虚拟出 replicaNumber / 4 * 4 个虚拟节点。 一个真实节点对应 replicaNumber 个虚拟节点
             for (int i = 0; i < replicaNumber / 4; i++) {
                 /**
                  * 可以选择服务器的ip或主机名作为关键字进行哈希，这样每台机器就能确定其在哈希环上的位置，
                  * 这里假设将N台服务器使用ip地址(getPath)哈希后在环空间的位置
                  */
                 byte[] digestMd5 = md5(node.getPath() + i);
+                //
                 for (int h = 0; h < 4; h++) {
-                    // 此处 总计循环次数为  nodes.size() * (replicaNumber / 4) * 4 = nodes.size() * replicaNumber = 1600
+                    // 此处 总计循环次数为  nodes.size() * (replicaNumber / 4) * 4
+                    // = nodes.size() 物理节点数 * replicaNumber 虚拟节点数  = 1600
                     long hashj = hash(digestMd5, h);
 
                     /**
                      * key 为计算的hash结果。 value为存储值
                      *
                      * key:  节点地址
-                     *
                      */
                     virtualNodes.put(hashj, node);
                 }
@@ -108,9 +116,10 @@ public class ConsistentHash {
 
         return node;
     }
-
     /**
-     * 从节点Hash值中按规则寻找
+     * 从节点Hash值中按规则寻找。
+     *
+     * 沿着顺时针方向，数据hash值向后找到第一个Node Hash值即认为该数据hash值对应的数据映射到该Node上。
      *
      * @param hash hsah 值
      * @return
