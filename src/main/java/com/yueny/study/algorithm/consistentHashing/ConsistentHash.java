@@ -53,7 +53,7 @@ public class ConsistentHash {
                  * 这里假设将N台服务器使用ip地址(getPath)哈希后在环空间的位置
                  */
                 byte[] digestMd5 = md5(node.getPath() + i);
-                //
+
                 for (int h = 0; h < 4; h++) {
                     // 此处 总计循环次数为  nodes.size() * (replicaNumber / 4) * 4
                     // = nodes.size() 物理节点数 * replicaNumber 虚拟节点数  = 1600
@@ -86,8 +86,13 @@ public class ConsistentHash {
     }
 
     public static Node select(Trigger trigger, List<Node> nodes) {
+        // 如果物理节点没有变化，则 identityHashCode 不会有变化
         int _identityHashCode = identityHashCode(nodes);
-        if (consistentHash == null || consistentHash.identityHashCode != _identityHashCode) {
+        if (
+                // 第一次初始化，consistentHash == null
+                consistentHash == null
+                // 物理节点有变化
+                || consistentHash.identityHashCode != _identityHashCode) {
             synchronized (ConsistentHash.class) {
                 if (consistentHash == null || consistentHash.identityHashCode != _identityHashCode) {
                     consistentHash = new ConsistentHash(nodes);
@@ -126,18 +131,21 @@ public class ConsistentHash {
      */
     private Node sekectForKey(long hash) {
         Node node;
-        Long key = hash;
+        Long fromKey = hash;
 
-        if (!virtualNodes.containsKey(key)) {
-            SortedMap<Long, Node> tailMap = virtualNodes.tailMap(key);
+        if (!virtualNodes.containsKey(fromKey)) {
+            // 截取 map里面键key 大于等于 fromKey 的所有元素
+            SortedMap<Long, Node> tailMap = virtualNodes.tailMap(fromKey);
             if (tailMap.isEmpty()) {
-                key = virtualNodes.firstKey();
+                // 如果 tailMap 为空即没有比fromKey大的键， 则返回 virtualNodes 集合中最小Key的元素值
+                fromKey = virtualNodes.firstKey();
             } else {
-                key = tailMap.firstKey();
+                // 否则返回 tailMap 集合中最小Key的元素值， 即第一个 Node
+                fromKey = tailMap.firstKey();
             }
         }
 
-        node = virtualNodes.get(key);
+        node = virtualNodes.get(fromKey);
         return node;
     }
 

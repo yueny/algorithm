@@ -55,6 +55,9 @@ public class ConsistentHashTest {
         }
 
         System.out.println("数据对象迁移比率:"+num/10.0+"%");
+
+        // 存入数据
+
     }
 
     private Map<Node,Integer> select(List<Node> ns){
@@ -68,7 +71,8 @@ public class ConsistentHashTest {
         }
 
         for (Trigger j:js) {
-            Node node = ConsistentHash.select(j,ns);
+            // 根据存入的数据得到对应节点
+            Node node = ConsistentHash.select(j, ns);
             Integer now = result.get(node);
             if(now!=null){
                 result.put(node,now+1);
