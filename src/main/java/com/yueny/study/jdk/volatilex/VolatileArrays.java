@@ -13,10 +13,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @description:
  */
 public class VolatileArrays {
-    static volatile int [] arrays={1,1,1,1,1};
-    static int x=0;
-    static volatile int y=0;
-    static volatile AtomicInteger z=new AtomicInteger(0);
+    // 不保证原子性
+    static volatile int[] arrays = {1,1,1,1,1};
+    // 不保证原子性
+    static int x = 0;
+    // 不保证原子性
+    static volatile int y = 0;
+    // 保证原子性
+    static volatile AtomicInteger z = new AtomicInteger(0);
 
     private static ExecutorService executorService = Executors.newFixedThreadPool(5);
 
@@ -33,7 +37,7 @@ public class VolatileArrays {
         System.out.println("Z:" + z);
 
         // 模拟 1000 个线程进行 arrays、x、y、z 的累加
-        for (int i=0;i<1000;i++){
+        for (int i=0;i<10000;i++){
             executorService.submit(new ChangeNum());
         }
 
@@ -43,7 +47,7 @@ public class VolatileArrays {
             e.printStackTrace();
         }
 
-        System.out.println("模拟操作结束：");
+        System.out.println("模拟操作结束， 执行1000次，期望均为 1000。");
         System.out.println(Arrays.toString(arrays));
         System.out.println("X:" + x);
         System.out.println("Y:" + y);
