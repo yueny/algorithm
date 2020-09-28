@@ -9,7 +9,11 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
+ * 一致性Hash算法
+ *
  * 参考 dubbo ConsistentHashLoadBalance
+ * 参考文章： http://www.zsythink.net/archives/1182
+ * 
  */
 public class ConsistentHash {
 
