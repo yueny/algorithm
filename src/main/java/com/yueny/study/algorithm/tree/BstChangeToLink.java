@@ -1,4 +1,4 @@
-package com.yueny.study.algorithm.tree1;
+package com.yueny.study.algorithm.tree;
 
 /**
  *  1、输入一棵二元查找树，将该二元查找树转换成一个排序的双向链表。
