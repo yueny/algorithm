@@ -39,6 +39,10 @@
 
     <dependencies>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
@@ -75,22 +79,22 @@
 		</dependency>
 
 
-		<!-- yueny rapid -->
-		<dependency>
-			<groupId>com.yueny.rapid</groupId>
-			<artifactId>rapid-lang-date</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid</groupId>
-			<artifactId>rapid-lang-thread</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid</groupId>
-			<artifactId>rapid-lang-util</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
+<!--		&lt;!&ndash; yueny rapid &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>com.yueny.rapid</groupId>-->
+<!--			<artifactId>rapid-lang-date</artifactId>-->
+<!--			<version>1.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.yueny.rapid</groupId>-->
+<!--			<artifactId>rapid-lang-thread</artifactId>-->
+<!--			<version>1.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.yueny.rapid</groupId>-->
+<!--			<artifactId>rapid-lang-util</artifactId>-->
+<!--			<version>1.0.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
 
         <!-- JSON  -->
         <dependency>
@@ -105,7 +109,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-		
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -122,6 +125,17 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 

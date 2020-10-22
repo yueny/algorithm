@@ -14,8 +14,41 @@ package com.yueny.study.algorithm.tree;
  *
  */
 public class BstChangeToLink {
+    public static void main(final String[] args) {
+        /**
+         *   构造 二元查找树
+         *                   9(nodeTop)
+         *                  /         \
+         *                /            \
+         *              /               \
+         *     5(node21)              13(node22)
+         *       /    \               /        \
+         *     /       \             /          \
+         * 3(node211) 7(node212)  11(node221)  15(node222)
+         *
+         */
+        Node node221 = new Node(11,null,null);
+        Node node222 = new Node(15,null,null);
+        Node node211 = new Node(3,null,null);
+        Node node212 = new Node(7,null,null);
 
-    public static class Node{
+        Node node21 = new Node(5, node211, node212);
+        Node node22 = new Node(13, node221, node222);
+        Node nodeTop = new Node(9, node21, node22);
+
+        BstChangeToLink t = new BstChangeToLink();
+        // 转换
+        t.traversal(nodeTop);
+
+        System.out.println("双向链表从头结点向后遍历:");
+        t.printHead();
+
+        System.out.println();
+        System.out.println("双向链表从尾结点向前遍历:");
+        t.printTail();
+    }
+
+    private static class Node{
         private int value;
         private Node leftNode;
         private Node rightNode;
@@ -29,7 +62,7 @@ public class BstChangeToLink {
 
     private Node head,tail;
 
-    public void traversal(Node node){
+    private void traversal(Node node){
         if(node==null) return;
         if(node.leftNode!=null) traversal(node.leftNode);
         changeNode(node);
@@ -65,32 +98,4 @@ public class BstChangeToLink {
         }
     }
 
-    public static void main(final String[] args) {
-        /**
-         *      9
-         *    /   \
-         *  5       13
-         * / \     /   \
-         * 3  7     11  15
-         */
-        Node node11 = new Node(11,null,null);
-        Node node15 = new Node(15,null,null);
-        Node node3 = new Node(3,null,null);
-        Node node7 = new Node(7,null,null);
-
-        Node node5 = new Node(5,node3,node7);
-        Node node13 = new Node(13,node11,node15);
-        Node node9 = new Node(9,node5,node13);
-
-
-        BstChangeToLink t = new BstChangeToLink();
-        t.traversal(node9);
-
-        System.out.println("双向链表从头结点向后遍历:");
-        t.printHead();
-
-        System.out.println();
-        System.out.println("双向链表从尾结点向前遍历:");
-        t.printTail();
-    }
 }

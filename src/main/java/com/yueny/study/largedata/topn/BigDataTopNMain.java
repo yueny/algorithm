@@ -4,8 +4,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.yueny.rapid.lang.util.IpGenerateUtil;
-import com.yueny.rapid.lang.util.IpUtil;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.*;
@@ -229,7 +227,8 @@ public class BigDataTopNMain {
         // 一千万
         for(int i=0; i<10000000; i++){
             StringBuffer sb=new StringBuffer();
-            sb.append(IpGenerateUtil.getRandomIp());
+            // 随机生成 IP
+//            sb.append(IpGenerateUtil.getRandomIp());
             sb.append("|");
             sb.append(randomWord());
             sb.append("\r\n");
