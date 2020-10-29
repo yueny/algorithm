@@ -8,6 +8,9 @@
 * algorithm.consistentHashing
   + ConsistentHash： 一致性Hash算法
 * algorithm.cap
+* algorithm.subset
+给一个set打印出所有子集
+
 
 ## jdk  jdk 知识
 * jdk.autoboxing  
@@ -18,6 +21,9 @@
   + DateFormatService： 如何线程安全的使用 SimpleDateFormat
 * jdk.volatilex
   + VolatileArrays： volatile 例子
+* jdk.collection.union
+  + JDK： javaAPI 方式 取得集合的交并集
+  （或者apache的API）
   
 ## largedata 大数据相关算法
 目录见 largedata.list.md
