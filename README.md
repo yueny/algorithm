@@ -8,8 +8,7 @@
 * algorithm.consistentHashing
   + ConsistentHash： 一致性Hash算法
 * algorithm.cap
-* algorithm.subset
-给一个set打印出所有子集
+* algorithm.subset  给一个set打印出所有子集
 
 
 ## jdk  jdk 知识
